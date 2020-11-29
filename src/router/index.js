@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Cities from "@/views/Cities";
+import Weather from "@/views/Weather";
 
 Vue.use(VueRouter)
 
@@ -19,7 +21,19 @@ const routes = [
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/About.vue')
     }
+  },
+  {
+    path: '/cities',
+    name: 'Cities',
+    component: Cities
   }
+  ,
+  {
+    path: '/weather/:id',
+    name: 'Weather',
+    component: Weather
+  }
+
 ]
 
 const router = new VueRouter({
