@@ -4,7 +4,6 @@
     <div>
       <p>
         Please use this search box to find a city
-        <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
       </p>
       <input v-model="city" id="city" placeholder="insert city name"><br><br>
     </div>
@@ -21,14 +20,14 @@
         <div class="py-3">
           <table id="result" style="margin-left: auto; margin-right: auto">
             <tr>
-              <th >City id</th>
+              <th>City id</th>
               <th>City name</th>
               <th>Country</th>
               <th>State</th>
             </tr>
             <tr v-for="row in searchResult">
-              <td >
-              <input v-model="cityId" type="radio" name="selectedCity" :value="row.id"/>
+              <td>
+                <input v-model="cityId" type="radio" name="selectedCity" :value="row.id"/>
                 {{ row.id }}
               </td>
               <td>
@@ -43,25 +42,29 @@
             </tr>
           </table>
         </div>
-        <div>
+        <div class="py-3">
           <button
               v-on:click="addCity()"
               type="button"
+              id="addcity"
               class="btn btn-outline-info shadow-sm btn-lg ">
             Add city
           </button>
         </div>
-
+        <div class="alert alert-success py-2" v-if="savingSuccessful">
+          City successfully added to your watchlist
+        </div>
       </div>
-
-      <div class="py-4">
-        <p>You can see the list of your cities
-        <router-link to="Cities" >here</router-link><br><br>
-        </p>
-
+      <div class="alert alert-error py-2" v-if="savingFailed">
+        {{ failureReason }}
       </div>
     </div>
-
+    <div class="py-4">
+      <p>You can see the list of your cities
+        <router-link to="Cities">here</router-link>
+        <br><br>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -75,35 +78,19 @@ let searchCities = function (city) {
         this.searchResult = response.data;
       })
 
- // fetch('http://localhost:8080/cities?n=' + city)
-  //     .then(this.showResponse)
-  // console.log(this.showResponse)
-  // .then(result => result.json())
-  // .then((city) => {
-  //   console.log(city);
-  // });
-
-// WORKED AT SOME POINT
-//   let url = 'http://localhost:8080/cities?n=' + city;
-//   this.$http.get(url)
-//       .then((response) => response.json())
-//       .then((response) => {
-//         console.log(response.data);
-//         console.log(response);
-//       });
-
-  // this.$http.get(url)
-  //     .then((response) => response.json())
-  //     .then((city => {
-  //       console.log(city);
-  //     }))
 }
 
 let addCity = function () {
-  let url = 'http://localhost:8080/cities/add2?id=' + this.cityId;
-  console.log(this.cityId);
+  let url = 'http://localhost:8080/cities/add?id=' + this.cityId;
   this.$http.post(url)
-      // TODO ROUTE TO CITIES LIST
+      .then(result => {
+        this.savingSuccessful = true
+        console.log(result)
+      })
+      .catch(error => {
+        this.failureReason = error.response.data.message
+        this.savingFailed = true;
+      })
 }
 
 
@@ -121,7 +108,10 @@ export default {
     return {
       city: '',
       searchResult: [],
-      cityId: 0
+      cityId: 0,
+      savingSuccessful: false,
+      savingFailed: false,
+      failureReason: ''
     };
   },
 

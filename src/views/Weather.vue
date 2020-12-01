@@ -1,8 +1,7 @@
 <template>
   <div class="about">
     <div class="mx-3 py-4">
-      <h1>Here is weather for <span id="cityName"> {{ cityName.name }}</span></h1> // TODO FIX CITY NAME
-<!--      <h5>Your clientId is <span id="userId2">{{ this.$route.params.id }}</span> </h5>-->
+      <h1>Here is weather for <span id="cityName"> {{ cityName }}</span></h1>
     </div>
     <div>
       <table style="margin-left: auto; margin-right: auto">
@@ -33,8 +32,8 @@
 
 <script>
 
-let getCityName = function (){
-  let url = 'http://localhost:8080/cities/view/'+ this.$route.params.id;
+let getCityName = function () {
+  let url = 'http://localhost:8080/cities/view/' + this.$route.params.id;
   this.$http.get(url)
       .then(city => {
         this.cityName = city.data;
@@ -42,7 +41,7 @@ let getCityName = function (){
 }
 
 let getWeather = function () {
-  let url = 'http://localhost:8080/weather/'+ this.$route.params.id;
+  let url = 'http://localhost:8080/weather/' + this.$route.params.id;
   this.$http.get(url)
       .then(response => {
         this.weatherList = response.data;
