@@ -71,7 +71,7 @@
 <script>
 
 let searchCities = function (city) {
-  let url = 'http://localhost:8080/cities?n=' + city;
+  let url = 'http://localhost:8080/cities?name=' + city;
 
   this.$http.get(url)
       .then(response => {
