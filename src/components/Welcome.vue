@@ -85,7 +85,6 @@ let addCity = function () {
   this.$http.post(url)
       .then(result => {
         this.savingSuccessful = true
-        console.log(result)
       })
       .catch(error => {
         this.failureReason = error.response.data.message
@@ -95,7 +94,7 @@ let addCity = function () {
 
 
 export default {
-  name: 'HelloWorld',
+  name: 'Welcome',
   methods: {
     searchCities,
     addCity

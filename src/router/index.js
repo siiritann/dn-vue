@@ -12,13 +12,11 @@ const routes = [
     name: 'Home',
     component: Home
   },
-
   {
     path: '/cities',
     name: 'Cities',
     component: Cities
-  }
-  ,
+  },
   {
     path: '/weather/:id',
     name: 'Weather',
