@@ -66,7 +66,7 @@ let removeCity = function (index) {
       .then(result => {
         this.savingSuccessful = true
       })
-      .catch(error => console.log(error));
+      .catch(error => "");
   this.citiesList.splice(index, 1);
 }
 
