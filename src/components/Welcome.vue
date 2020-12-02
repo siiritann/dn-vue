@@ -5,14 +5,14 @@
       <p>
         Please use this search box to find a city
       </p>
-      <input v-model="city" id="city" placeholder="insert city name"><br><br>
+      <input v-model="city" id="city" placeholder="insert city name" class="myRounded"><br><br>
     </div>
     <div>
       <div class="py-3">
         <button
             v-on:click="searchCities(city)"
             type="button"
-            class="btn btn-outline-primary shadow-sm btn-lg ">
+            class="btn btn-outline-primary shadow-sm btn-lg">
           Search
         </button>
       </div>
@@ -71,16 +71,23 @@
 <script>
 
 let searchCities = function (city) {
+  this.failureReason = '';
+  this.savingSuccessful = false;
+  this.savingFailed = false;
   let url = 'http://localhost:8080/cities?name=' + city;
 
   this.$http.get(url)
       .then(response => {
         this.searchResult = response.data;
+        this.cityId = this.searchResult[0].id;
       })
 
 }
 
 let addCity = function () {
+  this.failureReason = '';
+  this.savingSuccessful = false;
+  this.savingFailed = false;
   let url = 'http://localhost:8080/cities/add?id=' + this.cityId;
   this.$http.post(url)
       .then(result => {
@@ -119,6 +126,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.myRounded {
+  border-radius: 0.3rem;
+  border-color: black;
+  border-width: 1px;
+}
+
 h3 {
   margin: 40px 0 0;
 }
