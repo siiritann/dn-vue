@@ -5,6 +5,7 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
+Vue.prototype.$server = "http://localhost:8080"
 
 new Vue({
   router,

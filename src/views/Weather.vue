@@ -33,7 +33,7 @@
 <script>
 
 let getCityName = function () {
-  let url = 'http://localhost:8080/cities/view/' + this.$route.params.id;
+  let url = this.$server + '/cities/view/' + this.$route.params.id;
   this.$http.get(url)
       .then(city => {
         this.cityName = city.data;
@@ -41,7 +41,7 @@ let getCityName = function () {
 }
 
 let getWeather = function () {
-  let url = 'http://localhost:8080/weather/' + this.$route.params.id;
+  let url = this.$server + '/weather/' + this.$route.params.id;
   this.$http.get(url)
       .then(response => {
         this.weatherList = response.data;

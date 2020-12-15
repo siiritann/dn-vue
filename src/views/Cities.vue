@@ -52,7 +52,7 @@
 <script>
 
 let getMyCities = function (city) {
-  let url = 'http://localhost:8080/cities/my';
+  let url = this.$server + '/cities/my';
   this.$http.get(url)
       .then(response => {
         this.citiesList = response.data;
@@ -61,7 +61,7 @@ let getMyCities = function (city) {
 
 let removeCity = function (index) {
   let id = this.citiesList[index].id;
-  let url = 'http://localhost:8080/cities/delete?id=' + id;
+  let url = this.$server + '/cities/delete?id=' + id;
   this.$http.delete(url)
       .then(result => {
         this.savingSuccessful = true

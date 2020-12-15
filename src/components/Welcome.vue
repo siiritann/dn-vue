@@ -74,7 +74,7 @@ let searchCities = function (city) {
   this.failureReason = '';
   this.savingSuccessful = false;
   this.savingFailed = false;
-  let url = 'http://localhost:8080/cities?name=' + city;
+  let url = this.$server + '/cities?name=' + city;
 
   this.$http.get(url)
       .then(response => {
@@ -88,7 +88,7 @@ let addCity = function () {
   this.failureReason = '';
   this.savingSuccessful = false;
   this.savingFailed = false;
-  let url = 'http://localhost:8080/cities/add?id=' + this.cityId;
+  let url = this.$server + '/cities/add?id=' + this.cityId;
   this.$http.post(url)
       .then(result => {
         this.savingSuccessful = true
