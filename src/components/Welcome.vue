@@ -55,7 +55,7 @@
           City successfully added to your watchlist
         </div>
       </div>
-      <div class="alert alert-error py-2" v-if="savingFailed">
+      <div class="alert alert-warning py-2" v-if="savingFailed">
         {{ failureReason }}
       </div>
     </div>
