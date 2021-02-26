@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Cities from "@/views/Cities";
 import Weather from "@/views/Weather";
+import Login from "@/views/Login";
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/weather/:id',
     name: 'Weather',
     component: Weather
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 
 ]
